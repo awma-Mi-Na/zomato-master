@@ -1,0 +1,12 @@
+API planning:
+       
+    *Auth
+    *Food
+    *restaurants
+    *menu
+    *order
+    *image
+    *review
+    *user
+    *payments -> razorpay
+    

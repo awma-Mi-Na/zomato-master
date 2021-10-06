@@ -1,6 +1,6 @@
-import { Mongoose } from "mongoose";
+import mongoose from "mongoose";
 
-const imageSchema = new Mongoose.Schema(
+const imageSchema = new mongoose.Schema(
   {
     images: [
       {
@@ -13,4 +13,4 @@ const imageSchema = new Mongoose.Schema(
   }
 );
 
-export const ImageModel = Mongoose.model("Images", imageSchema);
+export const ImageModel = mongoose.model("Images", imageSchema);
