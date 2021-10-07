@@ -13,6 +13,9 @@ import helmet from "helmet";
 // db connection
 import ConnectDB from "./database/connection";
 
+// microservice routes
+import Auth from "./API/auth";
+
 const zomato = express();
 
 // middleware application
@@ -20,6 +23,9 @@ zomato.use(helmet());
 zomato.use(cors());
 zomato.use(express.json());
 zomato.use(express.urlencoded());
+
+// application routes
+zomato.use("/auth", Auth);
 
 zomato.get("/", (req, res) => {
   return res.json({ message: "setup successful" });
