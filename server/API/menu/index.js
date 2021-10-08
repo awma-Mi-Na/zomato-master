@@ -32,7 +32,7 @@ methods             GET
 Router.get("/image/:_id", async (req, res) => {
   try {
     const { _id } = req.params;
-    const menus = await Image.findOne(_id);
+    const menus = await ImageModel.findOne(_id);
     return res.json({ menus });
   } catch (error) {
     return res.status(500).json({ error: error.message });
