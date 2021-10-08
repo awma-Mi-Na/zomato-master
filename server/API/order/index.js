@@ -1,0 +1,52 @@
+import { OrderModel } from "../../database/allModels";
+import express from "express";
+
+const Router = express.Router();
+
+/*
+route               /
+description         get all orders based on id
+access              public
+parameter           _id
+methods             GET
+*/
+
+Router.get("/:_id", async (req, res) => {
+  try {
+    const { _id } = req.params;
+    const getOrders = OrderModel.findOne({ user: _id });
+
+    if (!getOrders) return res.status(404).json({ error: "User not found" });
+  } catch (error) {
+    return res.status(500).json({ error: error.message });
+  }
+});
+
+/*
+route               /new
+description         add new order
+access              public
+parameter           _id
+methods             POST
+*/
+
+Router.post("/new/:_id", async (req, res) => {
+  try {
+    const { _id } = req.params;
+    const { newOrderDetails } = req.body;
+    const addNewOrder = OrderModel.findOneAndUpdate(
+      { user: _id },
+      {
+        $push: { orderDetails: newOrderDetails },
+      },
+      {
+        new: true,
+      }
+    );
+    return res.json({ order: addNewOrder });
+  } catch (error) {
+    return res.status(500).json({ error: error.message });
+  }
+});
+
+export default Router;

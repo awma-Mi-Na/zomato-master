@@ -1,10 +1,9 @@
 // libraries
 import express from "express";
-import AWS from "aws-sdk";
 import multer from "multer";
 
 // DB model
-import { ImageModel } from "../../database/allModels";
+// import { ImageModel } from "../../database/allModels";
 
 const Router = express.Router();
 
@@ -12,12 +11,8 @@ const Router = express.Router();
 const storage = multer.memoryStorage();
 const upload = multer({ storage });
 
-// add S3 bucket config
-const s3bucket = new AWS.S3({
-  accessKeyID: process.env.AWS_S3_ACCESS_KEY,
-  secretAccessKey: process.env.AWS_S3_SECRET_KEY,
-  region: "ap-south-1",
-});
+// utilities
+import { s3Upload } from "../../utils/AWS/s3";
 
 /*
 route               /
@@ -37,16 +32,6 @@ Router.post("/", upload.single("file"), async (req, res) => {
       Body: file.buffer,
       ContentType: file.mimetype,
       ACL: "public-read",
-    };
-
-    // upload to s3
-    const s3Upload = (options) => {
-      return new Promise((resolve, reject) =>
-        s3bucket.upload(options, (error, data) => {
-          if (error) return reject(error);
-          return resolve(data);
-        })
-      );
     };
 
     const uploadImage = await s3Upload(bucketOptions);
