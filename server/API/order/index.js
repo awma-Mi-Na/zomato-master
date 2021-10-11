@@ -7,7 +7,7 @@ const Router = express.Router();
 /*
 route               /
 description         get all orders based on id
-access              public
+access              private
 parameter           _id
 methods             GET
 */
@@ -18,7 +18,7 @@ Router.get(
   async (req, res) => {
     try {
       const { _id } = req.params;
-      const getOrders = OrderModel.findOne({ user: _id });
+      const getOrders = await OrderModel.findOne({ user: _id });
 
       if (!getOrders) return res.status(404).json({ error: "User not found" });
     } catch (error) {
