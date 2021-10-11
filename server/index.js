@@ -5,6 +5,7 @@ require("dotenv").config();
 // libraries
 import express from "express";
 import passport from "passport";
+import session from "express-session";
 
 // cross origin request -> to allow api call from other servers(?) like react app
 import cors from "cors";
@@ -27,6 +28,7 @@ import User from "./API/user";
 
 // google auth configuration
 import googleAuthConfig from "./config/google.config";
+import routeConfig from "./config/route.config";
 
 const zomato = express();
 
@@ -34,12 +36,14 @@ const zomato = express();
 zomato.use(helmet());
 zomato.use(cors());
 zomato.use(express.json());
-zomato.use(express.urlencoded({ extended: true }));
-// zomato.use(passport.initialize());
-// zomato.use(passport.session());
+zomato.use(express.urlencoded({ extended: false }));
+zomato.use(session({ secret: "secret" }));
+zomato.use(passport.initialize());
+zomato.use(passport.session());
 
 // passport configuration
 googleAuthConfig(passport);
+routeConfig(passport);
 
 // application routes
 zomato.use("/auth", Auth);

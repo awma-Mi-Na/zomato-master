@@ -16,7 +16,6 @@ route               /
 description         get all restaurant details
 access              public
 parameter           none
-methods             GET
 */
 
 Router.get("/", async (req, res) => {
