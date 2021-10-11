@@ -34,7 +34,7 @@ const zomato = express();
 zomato.use(helmet());
 zomato.use(cors());
 zomato.use(express.json());
-zomato.use(express.urlencoded());
+zomato.use(express.urlencoded({ extended: true }));
 // zomato.use(passport.initialize());
 // zomato.use(passport.session());
 
