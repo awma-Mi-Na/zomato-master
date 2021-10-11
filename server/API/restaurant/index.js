@@ -38,12 +38,12 @@ parameter           _id
 methods             GET
 */
 
-Router.get("/:_id", async (req, res) => {
+Router.get("/id/:_id", async (req, res) => {
   try {
-    await ValidateRestaurantId(res.params);
+    await ValidateRestaurantId(req.params);
 
     const { _id } = req.params;
-    const restaurant = await RestaurantModel.findOne(_id);
+    const restaurant = await RestaurantModel.findOne({ id: _id });
 
     if (!restaurant)
       return res.status(404).json({ error: "Restaurant not found" });
