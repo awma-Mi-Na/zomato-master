@@ -112,7 +112,7 @@ const LargeTab = () => {
   const { type } = useParams();
   return (
     <>
-      <div className="hidden lg:flex gap-14 container px-20 mx-auto">
+      <div className="hidden lg:flex gap-14 container px-20 my-8 mx-auto">
         {allTypes.map((item) => (
           <Link to={`/${item.id}`}>
             <div
@@ -155,7 +155,7 @@ const LargeTab = () => {
 const FoodTab = () => {
   return (
     <>
-      <div className="my-6">
+      <div>
         <MobileTab />
         <LargeTab />
       </div>
