@@ -18,7 +18,7 @@ const PictureCarouselCard = () => {
             }}
           />
         </div>
-        <div className="absolute bottom-2 left-4 text-white w-full ">
+        <div className="absolute bottom-2 ml-4 text-white w-full ">
           <h4 className="z-10">Newly Opened</h4>
           <h6 className="flex items-center z-10">
             18 places <IoMdArrowDropright />
