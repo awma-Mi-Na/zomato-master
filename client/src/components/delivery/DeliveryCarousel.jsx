@@ -67,7 +67,7 @@ const DeliveryCarousel = () => {
 
         {/* pc screen carousel */}
 
-        <div className="hidden lg:block">
+        <div className="hidden lg:block my-4">
           <Slider {...settings}>
             {categories.map((food) => (
               <DeliveryCategory {...food} />

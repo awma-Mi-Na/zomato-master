@@ -17,15 +17,15 @@ const DeliverySmCard = ({ image, title }) => {
 
 const DeliveryLgCard = ({ image, title }) => {
   return (
-    <div className="hidden lg:block w-64 h-48 ">
-      <div className="w-full h-full ">
+    <div className="hidden lg:inline w-64 h-48 ">
+      <div className="w-60 h-44 ">
         <img
           src={image}
           alt={title}
           className="w-full h-full object-cover rounded-md shadow-lg"
         />
       </div>
-      <div>
+      <div className="">
         <h3 className="text-xl font-medium my-1">{title}</h3>
       </div>
     </div>
