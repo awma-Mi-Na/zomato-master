@@ -31,7 +31,7 @@ const LargeNav = () => {
   return (
     <div className="hidden container mx-auto px-20 lg:inline">
       <div className="hidden w-full items-center justify-between gap-4 lg:flex ">
-        <div className="w-28">
+        <div className="w-36">
           <img
             src="https://b.zmtcdn.com/web_assets/b40b97e677bc7b2ca77c58c61db266fe1603954218.png"
             alt="logo"
@@ -63,7 +63,7 @@ const LargeNav = () => {
         </div>
 
         {/* for login and signup button */}
-        <div className="ml-15 flex gap-2 w-1/4">
+        <div className="flex gap-2 w-1/6">
           <button className="text-lg text-gray-500 hover:text-gray-800 w-full">
             Log in
           </button>
