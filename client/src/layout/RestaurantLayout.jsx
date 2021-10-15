@@ -7,7 +7,9 @@ import { RiDirectionLine, RiShareForwardLine } from "react-icons/ri";
 import { BiBookmarkPlus } from "react-icons/bi";
 import InfoButtons from "../components/restaurant/InfoButtons";
 
-const RestaurantLayout = () => {
+import TabContainer from "../components/restaurant/Tabs";
+
+const RestaurantLayout = (props) => {
   const images = [
     "https://b.zmtcdn.com/data/pictures/1/52971/ce5427a36e10f1bd0d4683593a1e6cff.jpg",
     "https://b.zmtcdn.com/data/pictures/chains/1/52971/f79c42fd86224e5cc3abe93e94159b91.jpg",
@@ -32,6 +34,7 @@ const RestaurantLayout = () => {
         {/* restaurant details */}
         <RestaurantInfo {...restaurantDetails} />
 
+        {/* Feature buttons */}
         <div className="my-4 flex flex-wrap gap-3">
           <InfoButtons isActive>
             <TiStarOutline /> Add Review
@@ -46,6 +49,12 @@ const RestaurantLayout = () => {
             <RiShareForwardLine /> Share
           </InfoButtons>
         </div>
+
+        {/* tabs */}
+        <div className="my-10">
+          <TabContainer />
+        </div>
+        <div>{props.children}</div>
       </div>
     </>
   );
