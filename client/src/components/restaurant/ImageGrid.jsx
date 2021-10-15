@@ -3,7 +3,7 @@ import { AiOutlineCamera } from "react-icons/ai";
 const ImageGrid = (props) => {
   return (
     <>
-      <div className="container mx-auto px-4 lg:px-20">
+      <div className="container">
         <div className="w-full h-60 md:hidden rounded-lg">
           <img
             src={props.images[0]}
