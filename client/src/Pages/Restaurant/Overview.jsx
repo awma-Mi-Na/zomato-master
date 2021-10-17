@@ -2,20 +2,49 @@ import { Link } from "react-router-dom";
 import { IoMdArrowDropright } from "react-icons/io";
 import Slider from "react-slick";
 import { NextArrow, PrevArrow } from "../../components/CarouselArrow";
+import ReactStars from "react-rating-stars-component";
 
 // components
 import MenuCollection from "../../components/restaurant/MenuCollection";
 import OverviewSimilarRestaurantCard from "../../components/restaurant/OverviewSimilarRestaurantCard";
+import ReviewCard from "../../components/restaurant/reviews/ReviewCard";
+import MapView from "../../components/restaurant/MapView";
 
 const Overview = () => {
   const settings = {
     arrows: true,
     infinite: true,
     speed: 500,
-    slidesToShow: 3,
+    slidesToShow: 4,
     slidesToScroll: 1,
     nextArrow: <NextArrow />,
     prevArrow: <PrevArrow />,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 3,
+          infinite: true,
+          dots: true,
+        },
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 2,
+          initialSlide: 2,
+        },
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+        },
+      },
+    ],
   };
 
   const similarRestaurants = [
@@ -65,9 +94,22 @@ const Overview = () => {
       address: "Indiranagar, Bangaluru",
     },
   ];
+
+  const ratingChanged = (newRating) => {
+    console.log(newRating);
+  };
+
+  const sideData = {
+    phno: ["+918022496586", "+919916795692"],
+    coord: [12.9734401359, 77.6202210411],
+    name: "SMOOR",
+    address:
+      "Ground Floor, Trinity Circle, 1 MG Road Mall, Near MG Road, Bangalore",
+  };
   return (
     <>
-      <div className="flex flex-col md:flex-row relative">
+      <div className="flex flex-col md:flex-row relative md:gap-4">
+        {/* main overview */}
         <div className="w-full md:w-2/3">
           <h2 className="font-semibold text-lg md:text-xl my-4">
             About this place
@@ -119,7 +161,7 @@ const Overview = () => {
           </div>
 
           {/* similar restaurants */}
-          <div className="">
+          <div className="w-full">
             <h4 className="text-lg font-medium mb-2">Similar Restaurants</h4>
             <Slider {...settings}>
               {similarRestaurants.map((restaurant) => (
@@ -127,11 +169,34 @@ const Overview = () => {
               ))}
             </Slider>
           </div>
+
+          {/* rate your experience */}
+          <div>
+            <h4 className="text-lg font-medium mb-2">
+              Rate your delivery experience
+            </h4>
+            <ReactStars
+              count={5}
+              onChange={ratingChanged}
+              size={24}
+              activeColor="#ffd700"
+            />
+            <div className="md:hidden my-4 flex flex-col gap-4">
+              <MapView {...sideData} />
+            </div>
+            <ReviewCard />
+            <ReviewCard />
+            <ReviewCard />
+          </div>
         </div>
+
+        {/* side overview */}
         <aside
           style={{ height: "fit-content" }}
-          className="hidden md:inline sticky top-2 md:w-1/3 bg-white p-3 shadow-xl"
-        ></aside>
+          className="hidden md:flex sticky top-2 md:w-1/3 bg-white p-3 shadow-md gap-4 md:flex-col"
+        >
+          <MapView {...sideData} />
+        </aside>
       </div>
     </>
   );
