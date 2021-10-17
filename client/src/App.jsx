@@ -8,6 +8,7 @@ import Temp from "./components/temp";
 // import components
 import Home from "./Pages/Home";
 import Overview from "./Pages/Restaurant/Overview";
+import OrderOnline from "./Pages/Restaurant/OrderOnline";
 
 function App() {
   return (
@@ -28,7 +29,7 @@ function App() {
       <RestaurantHOC
         path="/restaurant/:id/order-online"
         exact
-        component={Temp}
+        component={OrderOnline}
       />
       <RestaurantHOC path="/restaurant/:id/reviews" exact component={Temp} />
       <RestaurantHOC path="/restaurant/:id/menu" exact component={Temp} />
