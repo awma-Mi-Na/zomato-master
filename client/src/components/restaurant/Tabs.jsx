@@ -4,7 +4,7 @@ import { useLocation, Link, useParams } from "react-router-dom";
 const Tab = (props) => {
   const { id } = useParams();
   return (
-    <Link to={`${props.route}`}>
+    <Link to={`/restaurant/${id}/${props.route}`}>
       <div
         className={classNames("text-gray-500 font-medium w-full h-full ", {
           "text-zmtcolor-400 font-semibold": props.isActive,
