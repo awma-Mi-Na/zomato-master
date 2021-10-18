@@ -4,7 +4,7 @@ const PhotoCollection = (props) => {
       <div className="w-32 h-32 md:w-52 md:h-60 my-6">
         <div
           className="h-full w-full overflow-hidden rounded-lg"
-          onClick={props.openViewer}
+          onClick={props.openViewer(props.index)}
         >
           <img
             src={props.image}

@@ -2,8 +2,13 @@ import { FaUserAlt } from "react-icons/fa";
 import { HiLocationMarker } from "react-icons/hi";
 import { RiSearch2Line } from "react-icons/ri";
 import { IoMdArrowDropdown, IoMdArrowDropup } from "react-icons/io";
+import { useState } from "react";
 
-const MobileNav = () => {
+// component
+import SignIn from "../auth/SignIn";
+import UserDropdown from "./UserDropdown";
+
+const MobileNav = ({ openSignin, setOpenSignin }) => {
   return (
     <div className="flex w-full items-center justify-between lg:hidden">
       <div className="w-28">
@@ -17,9 +22,7 @@ const MobileNav = () => {
         <button className="bg-zmtcolor-400 text-white py-2 px-3 rounded-full">
           Use App
         </button>
-        <span className="border p-2 border-gray-300 text-zmtcolor-400 rounded-full">
-          <FaUserAlt />
-        </span>
+        <UserDropdown />
       </div>
     </div>
   );
@@ -75,11 +78,14 @@ const LargeNav = () => {
 };
 
 const Navbar = () => {
+  const [openSignin, setOpenSignin] = useState(false);
+  const [openSignup, setOpenSignup] = useState(false);
   return (
     <>
+      <SignIn isOpen={openSignin} setIsOpen={setOpenSignin} />
       <nav className="p-4 bg-white shadow-md lg:shadow-none flex items-center ">
-        <MobileNav />
-        <LargeNav />
+        <MobileNav SignIn={{ openSignin, setOpenSignin }} />
+        <LargeNav SignIn={{ openSignin, setOpenSignin }} />
       </nav>
     </>
   );

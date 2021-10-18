@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import PhotoCollection from "../../components/restaurant/PhotoCollection";
 import ImageViewer from "react-simple-image-viewer";
 
@@ -13,8 +13,14 @@ const Photos = () => {
   ]);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [currentImg, setCurrentImg] = useState(0);
-  const closeViewer = () => setIsMenuOpen(false);
-  const openViewer = (index) => setIsMenuOpen(true);
+  const closeViewer = () => {
+    setCurrentImg(0);
+    setIsMenuOpen(false);
+  };
+  const openViewer = useCallback((index) => {
+    setIsMenuOpen(false);
+    setCurrentImg(index);
+  }, []);
 
   return (
     <>
@@ -29,7 +35,11 @@ const Photos = () => {
       )}
       <div className="flex flex-wrap gap-3">
         {images.map((image, index) => (
-          <PhotoCollection image={image} openViewer={openViewer} />
+          <PhotoCollection
+            image={image}
+            openViewer={openViewer}
+            index={index}
+          />
         ))}
       </div>
     </>
