@@ -1,10 +1,12 @@
 import DeliveryCarousel from "./DeliveryCarousel";
 import Brand from "./Brand";
 import RestaurantCard from "../RestaurantCard";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 
 const Delivery = () => {
-  const [restList] = useState([
+  /* 
+  const [restList,setRestList] = useState([
     {
       _id: "12345",
       name: "Kerela Food Club",
@@ -45,6 +47,17 @@ const Delivery = () => {
       averageCost: 200,
     },
   ]);
+  */
+
+  const [restList, setRestList] = useState([]);
+
+  const reduxState = useSelector(
+    (globalstore) => globalstore.restaurant.restaurants
+  );
+
+  useEffect(() => {
+    reduxState.restaurants && setRestList(reduxState.restaurants);
+  }, [reduxState.restaurants]);
   return (
     <>
       <DeliveryCarousel />
