@@ -8,6 +8,7 @@ import { BiBookmarkPlus } from "react-icons/bi";
 import InfoButtons from "../components/restaurant/InfoButtons";
 
 import TabContainer from "../components/restaurant/Tabs";
+import CartContainer from "../components/cart/CartContainer";
 
 const RestaurantLayout = (props) => {
   const images = [
@@ -28,6 +29,7 @@ const RestaurantLayout = (props) => {
   return (
     <>
       <RestaurantNavbar />
+      <CartContainer />
       <div className="container mx-auto px-4 md:px-20">
         <ImageGrid images={images} />
 

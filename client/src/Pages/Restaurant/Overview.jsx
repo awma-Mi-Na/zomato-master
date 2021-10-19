@@ -163,7 +163,7 @@ const Overview = () => {
           </div>
 
           {/* similar restaurants */}
-          <div className="w-full">
+          <div className="w-full overflow-hidden">
             <h4 className="text-lg font-medium mb-2">Similar Restaurants</h4>
             <Slider {...settings}>
               {similarRestaurants.map((restaurant) => (
