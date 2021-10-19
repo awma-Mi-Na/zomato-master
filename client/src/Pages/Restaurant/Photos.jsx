@@ -11,16 +11,13 @@ const Photos = () => {
     "https://b.zmtcdn.com/data/reviews_photos/fc1/4a471d3cef27d37e4975cd8ed357ffc1_1471178446.jpg",
     "https://b.zmtcdn.com/data/reviews_photos/4f3/87c665a1c840db9876e80b77766f94f3_1515742801.jpg",
   ]);
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(true);
   const [currentImg, setCurrentImg] = useState(0);
   const closeViewer = () => {
     setCurrentImg(0);
     setIsMenuOpen(false);
   };
-  const openViewer = useCallback((index) => {
-    setIsMenuOpen(false);
-    setCurrentImg(index);
-  }, []);
+  const openViewer = () => setIsMenuOpen(true);
 
   return (
     <>

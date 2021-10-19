@@ -2,7 +2,7 @@ import { Dialog, Transition } from "@headlessui/react";
 import { Fragment, useState } from "react";
 import { FcGoogle } from "react-icons/fc";
 
-export default function SignIn({ isOpen, setIsOpen }) {
+export default function SignUp({ isOpen, setIsOpen }) {
   function closeModal() {
     setIsOpen(false);
   }
@@ -47,13 +47,23 @@ export default function SignIn({ isOpen, setIsOpen }) {
               <div className="inline-block w-full max-w-md p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl">
                 <div className="mt-2 w-full ">
                   <button className="flex justify-center py-2 rounded-lg items-center gap-2 w-full border border-gray-400 bg-white text-gray-700 hover:bg-gray-100">
-                    Sign in with google <FcGoogle />{" "}
+                    Sign up with google <FcGoogle />{" "}
                   </button>
                   <form className="flex flex-col gap-3">
                     <div className="flex flex-col gap-2 mt-3">
-                      <label htmlFor="email">Email</label>
+                      <label htmlFor="email">Full Name</label>
                       <input
                         type="text"
+                        name="signin"
+                        id="email"
+                        placeholder="John Doe"
+                        className="w-full border border-gra-400 focus:outline-none focus:border-zmtcolor-400 rounded-lg px-3 py-2"
+                      />
+                    </div>
+                    <div className="flex flex-col gap-2 mt-3">
+                      <label htmlFor="email">Email</label>
+                      <input
+                        type="email"
                         name="signin"
                         id="email"
                         placeholder="email@email.com"
@@ -71,7 +81,7 @@ export default function SignIn({ isOpen, setIsOpen }) {
                       />
                     </div>
                     <div className="w-full bg-zmtcolor-400 text-white py-2 rounded-lg text-center">
-                      Sign in
+                      Sign up
                     </div>
                   </form>
                 </div>

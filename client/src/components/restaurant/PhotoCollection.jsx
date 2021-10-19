@@ -1,10 +1,10 @@
 const PhotoCollection = (props) => {
   return (
     <>
-      <div className="w-32 h-32 md:w-52 md:h-60 my-6">
+      <div className="w-32 h-32 md:w-52 md:h-48 md:w-44 my-6">
         <div
           className="h-full w-full overflow-hidden rounded-lg"
-          onClick={props.openViewer(props.index)}
+          onClick={props.openViewer}
         >
           <img
             src={props.image}
