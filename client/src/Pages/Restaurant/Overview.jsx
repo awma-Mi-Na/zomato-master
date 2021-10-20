@@ -150,7 +150,6 @@ const Overview = () => {
           <div className="flex flex-wrap gap-3">
             <MenuCollection title="Food Menu" image={menuImage} />
           </div>
-          <div>torll</div>
 
           {/* cuisine list */}
           <div className="my-6">
