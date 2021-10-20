@@ -3,7 +3,7 @@ import express from "express";
 import multer from "multer";
 
 // DB model
-// import { ImageModel } from "../../database/allModels";
+import { ImageModel } from "../../database/allModels";
 
 const Router = express.Router();
 
@@ -13,6 +13,22 @@ const upload = multer({ storage });
 
 // utilities
 import { s3Upload } from "../../utils/AWS/s3";
+
+/*
+route               /:_id
+description         get image by id
+access              public
+parameter           _id
+methods             GET
+*/
+Router.get("/:_id", async (req, res) => {
+  try {
+    const image = ImageModel.findById(_id);
+    return res.json({ image });
+  } catch (error) {
+    return res.status(500).json({ error: error.message });
+  }
+});
 
 /*
 route               /
