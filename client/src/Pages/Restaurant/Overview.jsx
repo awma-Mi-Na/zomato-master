@@ -3,12 +3,17 @@ import { IoMdArrowDropright } from "react-icons/io";
 import Slider from "react-slick";
 import { NextArrow, PrevArrow } from "../../components/CarouselArrow";
 import ReactStars from "react-rating-stars-component";
+import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 // components
 import MenuCollection from "../../components/restaurant/MenuCollection";
 import OverviewSimilarRestaurantCard from "../../components/restaurant/OverviewSimilarRestaurantCard";
 import ReviewCard from "../../components/restaurant/reviews/ReviewCard";
 import MapView from "../../components/restaurant/MapView";
+
+// redux actions
+import { getImage } from "../../Redux/Reducer/image/image.action";
 
 const Overview = () => {
   const settings = {
@@ -106,6 +111,22 @@ const Overview = () => {
     address:
       "Ground Floor, Trinity Circle, 1 MG Road Mall, Near MG Road, Bangalore",
   };
+
+  const reduxState = useSelector(
+    (globalStore) => globalStore.restaurant.selectedRestaurant.restaurant
+  );
+  const [menuImage, setMenuImage] = useState({ images: [] });
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (reduxState) {
+      const images = [];
+      data.payload.image.images.map((location) => images.push(location));
+      dispatch(getImage(reduxState?.menuImage)).then((data) =>
+        setMenuImage(images)
+      );
+    }
+  }, []);
   return (
     <>
       <div className="flex flex-col md:flex-row relative md:gap-4">
@@ -127,13 +148,7 @@ const Overview = () => {
 
           {/* menu pics */}
           <div className="flex flex-wrap gap-3">
-            <MenuCollection
-              title="Food Menu"
-              image={[
-                "https://b.zmtcdn.com/data/menus/971/52971/98e728872b6f968251d239411455d54f.jpg",
-                "https://b.zmtcdn.com/data/menus/971/52971/0425c595f12e2e5bd0dcc439bf787ff5.jpg",
-              ]}
-            />
+            <MenuCollection title="Food Menu" image={menuImage} />
           </div>
 
           {/* cuisine list */}
