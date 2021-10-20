@@ -104,12 +104,14 @@ const Overview = () => {
     console.log(newRating);
   };
 
-  const sideData = {
-    phno: ["+918022496586", "+919916795692"],
-    coord: [12.9734401359, 77.6202210411],
-    name: "SMOOR",
-    address:
-      "Ground Floor, Trinity Circle, 1 MG Road Mall, Near MG Road, Bangalore",
+  const getLatLong = (address) => {
+    return address?.split(",").map((item) => parseFloat(item));
+  };
+  const mapData = {
+    phno: reduxState?.contactNumber.split(","),
+    coord: reduxState?.mapLocation?.split(",").map((item) => parseFloat(item)),
+    name: reduxState?.name,
+    address: getLatLong(reduxState?.address),
   };
 
   const reduxState = useSelector(
@@ -155,25 +157,18 @@ const Overview = () => {
           <div className="my-6">
             <h4 className="text-lg font-medium mb-4">Cuisines</h4>
             <div className="flex items-center gap-3 text-blue-600">
-              <span className="border border-gray-400 rounded-full py-1 px-2">
-                Desserts
-              </span>
-              <span className="border border-gray-400 rounded-full py-1 px-2">
-                Beverages
-              </span>
-              <span className="border border-gray-400 rounded-full py-1 px-2">
-                Bakery
-              </span>
-              <span className="border border-gray-400 rounded-full py-1 px-2">
-                Shakes
-              </span>
+              {reduxState?.cuisine.map((data) => (
+                <span className="border border-gray-400 rounded-full py-1 px-2">
+                  {data}
+                </span>
+              ))}
             </div>
           </div>
 
           {/* average cost */}
           <div className="my-6">
             <h4 className="text-lg font-medium">Average Cost</h4>
-            <h6>₹400 for one order (approx.)</h6>
+            <h6>₹{reduxState?.averageCost} for one order (approx.)</h6>
             <small>Exclusive of applicable taxes and charges, if any</small>
           </div>
 
@@ -199,7 +194,7 @@ const Overview = () => {
               activeColor="#ffd700"
             />
             <div className="md:hidden my-4 flex flex-col gap-4">
-              <MapView {...sideData} />
+              <MapView {...mapData} />
             </div>
             <ReviewCard />
             <ReviewCard />
@@ -212,7 +207,7 @@ const Overview = () => {
           style={{ height: "fit-content" }}
           className="hidden md:flex sticky top-2 md:w-1/3 bg-white p-3 shadow-md gap-4 md:flex-col"
         >
-          <MapView {...sideData} />
+          <MapView {...mapData} />
         </aside>
       </div>
     </>
