@@ -8,7 +8,7 @@ const MapView = (props) => {
       <div>
         <h4 className="text-xl font-medium mb-1">Call</h4>
         <h5 className="text-zmtcolor-300 font-light text-md">
-          {props.phno.map((num) => `${num}\n`)}
+          {/* {props.phno.map((num) => `${num}\n`)} */}
         </h5>
       </div>
 

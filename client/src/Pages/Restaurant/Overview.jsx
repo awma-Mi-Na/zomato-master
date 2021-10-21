@@ -14,6 +14,7 @@ import MapView from "../../components/restaurant/MapView";
 
 // redux actions
 import { getImage } from "../../Redux/Reducer/image/image.action";
+import { getReview } from "../../Redux/Reducer/review/review.action";
 
 const Overview = () => {
   const settings = {
@@ -117,18 +118,26 @@ const Overview = () => {
   const reduxState = useSelector(
     (globalStore) => globalStore.restaurant.selectedRestaurant.restaurant
   );
+
+  // local states to be updated with the redux state
   const [menuImage, setMenuImage] = useState({ images: [] });
+  const [reviews, setReviews] = useState([]);
   const dispatch = useDispatch();
 
-  useEffect(() => {
+  useEffect((data) => {
     if (reduxState) {
-      const images = [];
-      data.payload.image.images.map((location) => images.push(location));
-      dispatch(getImage(reduxState?.menuImage)).then((data) =>
-        setMenuImage(images)
+      dispatch(getImage(reduxState?.menuImage)).then((data) => {
+        const images = [];
+        data.payload.image.images.map((location) => images.push(location));
+
+        setMenuImage(images);
+      });
+      dispatch(getReview(reduxState?._id)).then((data) =>
+        setReviews(data.payload.reviews)
       );
     }
   }, []);
+
   return (
     <>
       <div className="flex flex-col md:flex-row relative md:gap-4">
@@ -196,9 +205,9 @@ const Overview = () => {
             <div className="md:hidden my-4 flex flex-col gap-4">
               <MapView {...mapData} />
             </div>
-            <ReviewCard />
-            <ReviewCard />
-            <ReviewCard />
+            {reviews.map((review) => (
+              <ReviewCard {...review} />
+            ))}
           </div>
         </div>
 

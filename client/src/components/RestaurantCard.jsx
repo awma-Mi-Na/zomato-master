@@ -14,12 +14,13 @@ const RestaurantCard = (props) => {
   const dispatch = useDispatch();
   useEffect(() => {
     props.photos &&
-      dispatch(getImage(props.photos)).then((data) =>
-        setImage(data.payload.image)
-      );
+      dispatch(getImage(props.photos)).then((data) => {
+        console.log("heeelloo", data);
+        setImage(data.payload.image);
+      });
   }, [props.photos]);
   return (
-    <Link to={`/restaurant/${props_id}`} className="w-full">
+    <Link to={`/restaurant/${props._id}`} className="w-full">
       <div className="bg-white p-4 mb-4 w-full rounded-2xl md:w-1/2 lg:w-1/3 transition duration-700 ease-in-out hover:shadow-lg">
         <div className="w-full h-56 lg:h-64 relative">
           <div className="absolute w-full flex items-end justify-between bottom-4">
@@ -36,14 +37,14 @@ const RestaurantCard = (props) => {
               )}
             </div>
             <span className="bg-white bg-opacity-75 p-1 rounded mr-2">
-              {`${props.durationOfDelivery}`} min
+              {`${props.avgDeliveryInMin}`} min
             </span>
           </div>
-          <img
+          {/* <img
             src={image.images.length && image.images[0].location}
             alt="food"
             className="w-full h-full object-cover rounded-2xl"
-          />
+          /> */}
         </div>
         <div className="mt-2 flex flex-col gap-1">
           <div className="flex items-center justify-between">

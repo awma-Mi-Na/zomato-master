@@ -16,7 +16,7 @@ const Master = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getRestaurant());
+    dispatch(getRestaurant()).then((data) => console.log(data));
   }, []);
 
   return (

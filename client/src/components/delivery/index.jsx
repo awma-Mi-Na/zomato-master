@@ -57,6 +57,7 @@ const Delivery = () => {
 
   useEffect(() => {
     reduxState.restaurants && setRestList(reduxState.restaurants);
+    // console.log("heyyyyyyyyyy", restList);
   }, [reduxState.restaurants]);
   return (
     <>

@@ -33,13 +33,14 @@ const RestaurantLayout = (props) => {
 
   useEffect(() => {
     dispatch(getSpecificRestaurant(id)).then((data) => {
+      console.log(data);
       setRestaurant((prev) => ({ ...prev, ...data.payload.restaurant }));
 
-      dispatch(getImage(data.payload.restaurant.photos)).then((images) =>
-        setRestaurant((prev) => {
-          return { ...prev, ...images.payload.image };
-        })
-      );
+      // dispatch(getImage(data.payload.restaurant.photos)).then((images) =>
+      //   setRestaurant((prev) => {
+      //     return { ...prev, ...images.payload.image };
+      //   })
+      // );
     });
   }, []);
   // const images = [
@@ -57,6 +58,7 @@ const RestaurantLayout = (props) => {
     cuisine: restaurant.cuisine,
     address: restaurant.address,
   };
+  console.log(restaurant);
   return (
     <>
       <RestaurantNavbar />
