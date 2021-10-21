@@ -11,7 +11,8 @@ const RestaurantInfo = (props) => {
           <div className="flex items-center gap-6 text-xs md:text-base">
             <div className="flex items-center gap-2">
               <span className="flex rounded items-center gap-1 text-white font-medium bg-green-600 px-2 py-1">
-                {props.restaurantRating}
+                {props.rating}
+
                 <TiStarFullOutline />
               </span>
               <span>
@@ -21,7 +22,7 @@ const RestaurantInfo = (props) => {
             </div>
             <div className="flex items-center gap-2">
               <span className="flex rounded items-center gap-1 text-white font-medium bg-green-600 px-2 py-1">
-                {props.deliveryRating}
+                {props.rating}
                 <TiStarFullOutline />
               </span>
               <span>
@@ -35,7 +36,8 @@ const RestaurantInfo = (props) => {
           <h3>{props.cuisine}</h3>
           <h3 className="text-gray-400">{props.address}</h3>
           <h3>
-            <span className="text-yellow-500">Open Now</span> - 11am - 8pm
+            <span className="text-yellow-500">Open Now</span>{" "}
+            {props.restaurantTimings}
           </h3>
         </div>
       </div>

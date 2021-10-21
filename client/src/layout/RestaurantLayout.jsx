@@ -33,14 +33,16 @@ const RestaurantLayout = (props) => {
 
   useEffect(() => {
     dispatch(getSpecificRestaurant(id)).then((data) => {
-      console.log(data);
+      console.log("get restaurant api call", data);
       setRestaurant((prev) => ({ ...prev, ...data.payload.restaurant }));
 
-      // dispatch(getImage(data.payload.restaurant.photos)).then((images) =>
-      //   setRestaurant((prev) => {
-      //     return { ...prev, ...images.payload.image };
-      //   })
-      // );
+      dispatch(getImage(data.payload.restaurant.photos)).then((images) => {
+        console.log("from getImage calls", images);
+        setRestaurant((prev) => {
+          return { ...prev, ...images.payload.image };
+        });
+        console.log("restaurant state", restaurant);
+      });
     });
   }, []);
   // const images = [
@@ -51,23 +53,23 @@ const RestaurantLayout = (props) => {
   //   "https://b.zmtcdn.com/data/reviews_photos/8da/6cb0c15e83088b91dc4561848ff088da_1567944418.jpg",
   // ];
 
-  const restaurantDetails = {
-    name: restaurant.name,
-    restaurantRating: restaurant.rating || 0,
-    deliveryRating: restaurant.rating || 0,
-    cuisine: restaurant.cuisine,
-    address: restaurant.address,
-  };
-  console.log(restaurant);
+  // const restaurantDetails = {
+  //   name: restaurant.name,
+  //   restaurantRating: restaurant.rating || 0,
+  //   deliveryRating: restaurant.rating || 0,
+  //   cuisine: restaurant.cuisine,
+  //   address: restaurant.address,
+  // };
+  console.log("from rest layout restaurant object", restaurant);
   return (
     <>
       <RestaurantNavbar />
       <CartContainer />
       <div className="container mx-auto px-4 md:px-20">
-        <ImageGrid images={restaurant.images} />
+        <ImageGrid images={restaurant?.images} />
 
         {/* restaurant details */}
-        <RestaurantInfo {...restaurantDetails} />
+        <RestaurantInfo {...restaurant} />
 
         {/* Feature buttons */}
         <div className="my-4 flex flex-wrap gap-3">

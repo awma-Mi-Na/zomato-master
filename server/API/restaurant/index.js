@@ -31,7 +31,7 @@ Router.get("/", async (req, res) => {
 });
 
 /*
-route               /
+route               /id/
 description         get specific restaurant details with id
 access              public
 parameter           _id

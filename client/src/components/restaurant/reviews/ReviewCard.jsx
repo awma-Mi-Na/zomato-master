@@ -1,6 +1,20 @@
 import { AiFillStar } from "react-icons/ai";
+import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import dayjs from "dayjs";
 
-const ReviewCard = () => {
+// redux actions
+import { getUser } from "../../../Redux/Reducer/user/user.action";
+
+const ReviewCard = (props) => {
+  const [user, setUser] = useState({});
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getUser(props.user))
+      .then
+      // (data) => setUser(data.payload.user.user.user) // user(in root reducer) -> user(in reducer) -> user(in backend api)
+      ();
+  }, []);
   return (
     <div className="flex flex-col gap-4 ">
       {/* header */}
@@ -14,7 +28,7 @@ const ReviewCard = () => {
             />
           </div>
           <div className="flex flex-col">
-            <h5>Lalawmpuia Chawngthu</h5>
+            <h5>{user?.fullname}</h5>
             <small className="text-gray-600">
               2 reviews &#8226; 2 Followers
             </small>
@@ -30,24 +44,16 @@ const ReviewCard = () => {
         <span className="text-xs flex items-center bg-yellow-400 text-white p-1 rounded-md">
           3 <AiFillStar />{" "}
         </span>
-        <h5 className="text-sm   uppercase">Delivery</h5>
-        <small className="text-gray-500">yesterday</small>
+        <h5 className="text-sm   uppercase">
+          {props.isRestaurantReview ? "Dining" : "Delivery"}
+        </h5>
+        <small className="text-gray-500">
+          {dayjs(props.createdAt).format("DD MM YYYY")}
+        </small>
       </div>
       {/* review text */}
       <div className="w-full">
-        <p className="text-gray-600 font-light w-full">
-          I can't believe how badly the birthday msg is written on this cake I
-          can't believe how badly the birthday msg is written on this cake I
-          can't believe how badly the birthday msg is written on this cake I
-          can't believe how badly the birthday msg is written on this cake I
-          can't believe how badly the birthday msg is written on this cake I
-          can't believe how badly the birthday msg is written on this cake I
-          can't believe how badly the birthday msg is written on this cake I
-          can't believe how badly the birthday msg is written on this cake I
-          can't believe how badly the birthday msg is written on this cake I
-          can't believe how badly the birthday msg is written on this cake I
-          can't believe how badly the birthday msg is written on this cake I
-        </p>
+        <p className="text-gray-600 font-light w-full">{props.reviewText}</p>
       </div>
     </div>
   );

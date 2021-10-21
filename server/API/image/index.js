@@ -23,8 +23,8 @@ methods             GET
 */
 Router.get("/:_id", async (req, res) => {
   try {
-    const image = ImageModel.findById(req.params._id);
-    return res.json({ image: image });
+    const image = await ImageModel.findById(req.params._id);
+    return res.json({ image });
   } catch (error) {
     return res.status(500).json({ error: error.message });
   }

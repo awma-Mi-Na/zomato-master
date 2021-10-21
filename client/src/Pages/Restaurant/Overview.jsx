@@ -108,35 +108,47 @@ const Overview = () => {
   const getLatLong = (address) => {
     return address?.split(",").map((item) => parseFloat(item));
   };
-  const mapData = {
-    phno: reduxState?.contactNumber.split(","),
-    coord: reduxState?.mapLocation?.split(",").map((item) => parseFloat(item)),
-    name: reduxState?.name,
-    address: getLatLong(reduxState?.address),
-  };
 
   const reduxState = useSelector(
     (globalStore) => globalStore.restaurant.selectedRestaurant.restaurant
   );
+  const mapData = {
+    phno: reduxState?.contactNumber.split(","),
+    coord: getLatLong(reduxState?.mapLocation),
+    name: reduxState?.name,
+    address: reduxState?.address,
+  };
+
+  console.log("mapData", mapData);
 
   // local states to be updated with the redux state
   const [menuImage, setMenuImage] = useState({ images: [] });
   const [reviews, setReviews] = useState([]);
   const dispatch = useDispatch();
 
-  useEffect((data) => {
-    if (reduxState) {
-      dispatch(getImage(reduxState?.menuImage)).then((data) => {
-        const images = [];
-        data.payload.image.images.map((location) => images.push(location));
+  useEffect(
+    (data) => {
+      if (reduxState) {
+        console.log("reduxstate in overview", reduxState);
+        // dispatch(getImage(reduxState?.menuImages)).then((data) =>
+        //   data.payload.image.images.map(({location})=>console.log(location))
+        // );
+        dispatch(getImage(reduxState?.menuImages)).then((data) => {
+          const images = [];
+          data.payload.image.images.map(({ location }) =>
+            images.push(location)
+          );
 
-        setMenuImage(images);
-      });
-      dispatch(getReview(reduxState?._id)).then((data) =>
-        setReviews(data.payload.reviews)
-      );
-    }
-  }, []);
+          setMenuImage(images);
+          console.log("menu image state", images);
+        });
+        // dispatch(getReview(reduxState?._id)).then((data) =>
+        //   setReviews(data.payload.reviews)
+        // );
+      }
+    },
+    [reduxState]
+  );
 
   return (
     <>

@@ -8,15 +8,16 @@ import { getImage } from "../Redux/Reducer/image/image.action";
 
 const RestaurantCard = (props) => {
   const [image, setImage] = useState({
-    images: [],
+    images: [{ location: "" }],
   });
 
   const dispatch = useDispatch();
   useEffect(() => {
     props.photos &&
       dispatch(getImage(props.photos)).then((data) => {
-        console.log("heeelloo", data);
-        setImage(data.payload.image);
+        console.log("data.payload.image", data.payload.image);
+        setImage(data.payload.image.images);
+        console.log("image state", image);
       });
   }, [props.photos]);
   return (
@@ -40,11 +41,11 @@ const RestaurantCard = (props) => {
               {`${props.avgDeliveryInMin}`} min
             </span>
           </div>
-          {/* <img
-            src={image.images.length && image.images[0].location}
+          <img
+            src={image.length && image[5].location}
             alt="food"
             className="w-full h-full object-cover rounded-2xl"
-          /> */}
+          />
         </div>
         <div className="mt-2 flex flex-col gap-1">
           <div className="flex items-center justify-between">
