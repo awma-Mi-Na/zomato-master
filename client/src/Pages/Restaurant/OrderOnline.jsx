@@ -1,11 +1,33 @@
 import FloatingMenuBtn from "../../components/restaurant/OrderOnline/FloatingMenuBtn";
 import { AiOutlineCompass } from "react-icons/ai";
 import { BiTimeFive } from "react-icons/bi";
+import { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 
 // components
 import MenuListContainer from "../../components/restaurant/OrderOnline/MenuListContainer";
 import FoodList from "../../components/restaurant/OrderOnline/FoodList";
+
+// redux actions
+import { getFoodList } from "../../Redux/Reducer/food/food.action";
+
 const OrderOnline = () => {
+  const [menu, setMenu] = useState([]);
+  const reduxState = useSelector(
+    (globalStore) => globalStore.restaurant.selectedRestaurant.restaurant
+  );
+  // console.log({ orderonline: reduxState });
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    reduxState &&
+      dispatch(getFoodList(reduxState.menu)).then((data) =>
+        setMenu(data.payload.menus.menus)
+      );
+  }, [reduxState]);
+
+  console.log({ menu: menu });
+
   return (
     <>
       <div className="w-full flex">
@@ -25,124 +47,12 @@ const OrderOnline = () => {
             </h4>
           </div>
           <section className="flex flex-col gap-3 md:gap-5 md:h-screen overflow-y-scroll">
-            <FoodList
-              title="Recommended"
-              items={[
-                {
-                  image:
-                    "https://b.zmtcdn.com/data/dish_photos/5be/3fcf7f559b4dd21a925ea67e42ea45be.jpg?output-format:webp",
-                  title: "Belgium Chocolate Truffle half Kg",
-                  rating: "4",
-                  price: "810",
-                  description:
-                    "Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam at natus culpa dicta obcaecati recusandae quibusdam libero temporibus ad in? Qui consequatur ratione, natus eaque totam nobis deserunt eius! Voluptate!",
-                },
-                {
-                  image:
-                    "https://b.zmtcdn.com/data/dish_photos/5be/3fcf7f559b4dd21a925ea67e42ea45be.jpg?output-format:webp",
-                  title: "Belgium Chocolate Truffle half Kg",
-                  rating: "4",
-                  price: "810",
-                  description:
-                    "Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam at natus culpa dicta obcaecati recusandae quibusdam libero temporibus ad in? Qui consequatur ratione, natus eaque totam nobis deserunt eius! Voluptate!",
-                },
-                {
-                  image:
-                    "https://b.zmtcdn.com/data/dish_photos/5be/3fcf7f559b4dd21a925ea67e42ea45be.jpg?output-format:webp",
-                  title: "Belgium Chocolate Truffle half Kg",
-                  rating: "4",
-                  price: "810",
-                  description:
-                    "Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam at natus culpa dicta obcaecati recusandae quibusdam libero temporibus ad in? Qui consequatur ratione, natus eaque totam nobis deserunt eius! Voluptate!",
-                },
-                {
-                  image:
-                    "https://b.zmtcdn.com/data/dish_photos/5be/3fcf7f559b4dd21a925ea67e42ea45be.jpg?output-format:webp",
-                  title: "Belgium Chocolate Truffle half Kg",
-                  rating: "4",
-                  price: "810",
-                  description:
-                    "Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam at natus culpa dicta obcaecati recusandae quibusdam libero temporibus ad in? Qui consequatur ratione, natus eaque totam nobis deserunt eius! Voluptate!",
-                },
-                {
-                  image:
-                    "https://b.zmtcdn.com/data/dish_photos/5be/3fcf7f559b4dd21a925ea67e42ea45be.jpg?output-format:webp",
-                  title: "Belgium Chocolate Truffle half Kg",
-                  rating: "4",
-                  price: "810",
-                  description:
-                    "Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam at natus culpa dicta obcaecati recusandae quibusdam libero temporibus ad in? Qui consequatur ratione, natus eaque totam nobis deserunt eius! Voluptate!",
-                },
-                {
-                  image:
-                    "https://b.zmtcdn.com/data/dish_photos/5be/3fcf7f559b4dd21a925ea67e42ea45be.jpg?output-format:webp",
-                  title: "Belgium Chocolate Truffle half Kg",
-                  rating: "4",
-                  price: "810",
-                  description:
-                    "Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam at natus culpa dicta obcaecati recusandae quibusdam libero temporibus ad in? Qui consequatur ratione, natus eaque totam nobis deserunt eius! Voluptate!",
-                },
-              ]}
-            />
-            <FoodList
-              title="Dessert"
-              items={[
-                {
-                  image:
-                    "https://b.zmtcdn.com/data/dish_photos/5be/3fcf7f559b4dd21a925ea67e42ea45be.jpg?output-format:webp",
-                  title: "Belgium Chocolate Truffle half Kg",
-                  rating: "4",
-                  price: "810",
-                  description:
-                    "Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam at natus culpa dicta obcaecati recusandae quibusdam libero temporibus ad in? Qui consequatur ratione, natus eaque totam nobis deserunt eius! Voluptate!",
-                },
-                {
-                  image:
-                    "https://b.zmtcdn.com/data/dish_photos/5be/3fcf7f559b4dd21a925ea67e42ea45be.jpg?output-format:webp",
-                  title: "Belgium Chocolate Truffle half Kg",
-                  rating: "4",
-                  price: "810",
-                  description:
-                    "Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam at natus culpa dicta obcaecati recusandae quibusdam libero temporibus ad in? Qui consequatur ratione, natus eaque totam nobis deserunt eius! Voluptate!",
-                },
-                {
-                  image:
-                    "https://b.zmtcdn.com/data/dish_photos/5be/3fcf7f559b4dd21a925ea67e42ea45be.jpg?output-format:webp",
-                  title: "Belgium Chocolate Truffle half Kg",
-                  rating: "4",
-                  price: "810",
-                  description:
-                    "Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam at natus culpa dicta obcaecati recusandae quibusdam libero temporibus ad in? Qui consequatur ratione, natus eaque totam nobis deserunt eius! Voluptate!",
-                },
-                {
-                  image:
-                    "https://b.zmtcdn.com/data/dish_photos/5be/3fcf7f559b4dd21a925ea67e42ea45be.jpg?output-format:webp",
-                  title: "Belgium Chocolate Truffle half Kg",
-                  rating: "4",
-                  price: "810",
-                  description:
-                    "Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam at natus culpa dicta obcaecati recusandae quibusdam libero temporibus ad in? Qui consequatur ratione, natus eaque totam nobis deserunt eius! Voluptate!",
-                },
-                {
-                  image:
-                    "https://b.zmtcdn.com/data/dish_photos/5be/3fcf7f559b4dd21a925ea67e42ea45be.jpg?output-format:webp",
-                  title: "Belgium Chocolate Truffle half Kg",
-                  rating: "4",
-                  price: "810",
-                  description:
-                    "Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam at natus culpa dicta obcaecati recusandae quibusdam libero temporibus ad in? Qui consequatur ratione, natus eaque totam nobis deserunt eius! Voluptate!",
-                },
-                {
-                  image:
-                    "https://b.zmtcdn.com/data/dish_photos/5be/3fcf7f559b4dd21a925ea67e42ea45be.jpg?output-format:webp",
-                  title: "Belgium Chocolate Truffle half Kg",
-                  rating: "4",
-                  price: "810",
-                  description:
-                    "Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam at natus culpa dicta obcaecati recusandae quibusdam libero temporibus ad in? Qui consequatur ratione, natus eaque totam nobis deserunt eius! Voluptate!",
-                },
-              ]}
-            />
+            {menu.map(
+              (item) => (
+                <FoodList key={item._id} {...item} />
+              )
+              // console.log({ "inside order online": item })
+            )}
           </section>
         </div>
       </div>

@@ -10,10 +10,10 @@ const ReviewCard = (props) => {
   const [user, setUser] = useState({});
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(getUser(props.user))
-      .then
+    dispatch(getUser(props.user)).then(
       // (data) => setUser(data.payload.user.user.user) // user(in root reducer) -> user(in reducer) -> user(in backend api)
-      ();
+      (data) => console.log(data)
+    );
   }, []);
   return (
     <div className="flex flex-col gap-4 ">

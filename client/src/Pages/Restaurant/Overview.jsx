@@ -112,12 +112,6 @@ const Overview = () => {
   const reduxState = useSelector(
     (globalStore) => globalStore.restaurant.selectedRestaurant.restaurant
   );
-  const mapData = {
-    phno: reduxState?.contactNumber.split(","),
-    coord: getLatLong(reduxState?.mapLocation),
-    name: reduxState?.name,
-    address: reduxState?.address,
-  };
 
   console.log("mapData", mapData);
 
@@ -149,6 +143,12 @@ const Overview = () => {
     },
     [reduxState]
   );
+  const mapData = {
+    phno: reduxState?.contactNumber.split(","),
+    coord: getLatLong(reduxState?.mapLocation),
+    name: reduxState?.name,
+    address: reduxState?.address,
+  };
 
   return (
     <>
