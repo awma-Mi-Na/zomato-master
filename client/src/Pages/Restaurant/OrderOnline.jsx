@@ -26,15 +26,27 @@ const OrderOnline = () => {
       );
   }, [reduxState]);
 
-  console.log({ menu: menu });
+  // console.log({ menu: menu });
+  const [selected, setSelected] = useState("");
+
+  const onClickHandler = (e) => {
+    if (e.target.id) setSelected(e.target.id);
+    return;
+  };
 
   return (
     <>
       <div className="w-full flex">
         {/* side menu */}
         <aside className="hidden md:flex flex-col gap-3 border-r border-gray-200 w-1/4 h-screen overflow-y-scroll">
-          <MenuListContainer />
-          <MenuListContainer />
+          {menu.map((item) => (
+            <MenuListContainer
+              {...item}
+              key={item._id}
+              onClickHandler={onClickHandler}
+              selected={selected}
+            />
+          ))}
         </aside>
 
         {/* main component */}
