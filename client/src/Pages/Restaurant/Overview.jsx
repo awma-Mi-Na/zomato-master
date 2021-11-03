@@ -112,12 +112,24 @@ const Overview = () => {
   const reduxState = useSelector(
     (globalStore) => globalStore.restaurant.selectedRestaurant.restaurant
   );
+  const mapData = {
+    phno: reduxState?.contactNumber.split(","),
+    coord: getLatLong(reduxState?.mapLocation),
+    name: reduxState?.name,
+    address: reduxState?.address,
+  };
 
   console.log("mapData", mapData);
 
   // local states to be updated with the redux state
   const [menuImage, setMenuImage] = useState({ images: [] });
   const [reviews, setReviews] = useState([]);
+  // const [mapData, setMapData] = useState({
+  //   phno: [1234, 124],
+  //   coord: [12, 42],
+  //   name: "",
+  //   address: "",
+  // });
   const dispatch = useDispatch();
 
   useEffect(
@@ -132,6 +144,12 @@ const Overview = () => {
           data.payload.image.images.map(({ location }) =>
             images.push(location)
           );
+          // setMapData({
+          //   phno: reduxState?.contactNumber.split(","),
+          //   coord: getLatLong(reduxState?.mapLocation),
+          //   name: reduxState?.name,
+          //   address: reduxState?.address,
+          // });
 
           setMenuImage(images);
           console.log("menu image state", images);
@@ -143,12 +161,6 @@ const Overview = () => {
     },
     [reduxState]
   );
-  const mapData = {
-    phno: reduxState?.contactNumber.split(","),
-    coord: getLatLong(reduxState?.mapLocation),
-    name: reduxState?.name,
-    address: reduxState?.address,
-  };
 
   return (
     <>
